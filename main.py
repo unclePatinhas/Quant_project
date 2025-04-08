@@ -13,11 +13,13 @@ def main():
     logging.info("Starting ETL pipeline.")
     
     # Extract
-    df_raw = ext.extract_tweets("data/twitter_disaster_data/train.csv")
+    df_raw = ext.extract_tweets("data/stock_tweets/tweets_small.csv")
+    
     # Transform
-    df_clean = tfm.transform(df_raw)
+    df_clean_valid, _ = tfm.transform(df_raw)
+    
     # Load
-    # ld.load_to_sqlite(df_clean, db_path="tweets.db")
+    ld.load_to_sqlite(df_clean_valid, db_path="data/tweets.db")
     
     logging.info("ETL pipeline completed.")
 

@@ -5,9 +5,16 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13.1"
 dependencies = [
+    "ipykernel>=6.29.5",
+    "lxml-html-clean>=0.4.1",
+    "networkx>=3.4.2",
+    "newspaper3k>=0.2.8",
     "nltk>=3.9.1",
     "pandas>=2.2.3",
     "pydantic>=2.11.2",
+    "scikit-learn>=1.6.1",
     "setuptools>=78.1.0",
+    "statsmodels>=0.14.4",
     "wheel>=0.45.1",
+    "yfinance>=0.2.55",
 ]

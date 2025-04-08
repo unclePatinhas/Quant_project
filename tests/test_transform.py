@@ -2,7 +2,6 @@ import unittest
 from etl.transform import clean_text, tokenize_text
 
 class TestTransform(unittest.TestCase):
-
     def test_clean_text(self):
         text = "Check this out! https://example.com #wow @user"
         clean = clean_text(text)
