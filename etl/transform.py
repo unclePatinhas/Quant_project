@@ -53,7 +53,6 @@ def normalize_date(date_str: str) -> str:
         norm_date = datetime.fromtimestamp(date_str).isoformat() 
         # '%a %b %d %H:%M:%S +0000 %Y' 
         return norm_date
-    
     except Exception:
         return None
     
@@ -68,6 +67,7 @@ def validate_tweets_data(df: pd.DataFrame) -> pd.DataFrame:
         try:
             tweet = TweetModel(
                 id=row['id'],
+                ticker_symbol=row['ticker_symbol'],
                 author=row['author'],
                 post_date = row["post_date"],
                 clean_text = row['clean_text'],
@@ -80,7 +80,6 @@ def validate_tweets_data(df: pd.DataFrame) -> pd.DataFrame:
         except Exception as e:
             # Log invalid tweet data
             logger.error(f"Row {idx} - Invalid Tweet data: {e} | Raw data: {row.to_dict()}")
-
     return pd.DataFrame(valid_records)
 
 def transform(df: pd.DataFrame) -> pd.DataFrame:    
@@ -91,7 +90,7 @@ def transform(df: pd.DataFrame) -> pd.DataFrame:
     df.rename(columns={'tweet_id':'id', 'writer':'author'}, inplace=True)
     df = df.dropna(subset=['author', 'post_date'])
     
-    cols_select = ['id', 'author', 'post_date', 'clean_text', 
+    cols_select = ['id', 'ticker_symbol', 'author', 'post_date', 'clean_text', 
                    'comment_num', 'retweet_num', 'like_num', 'tokens']
     
     df_valid = validate_tweets_data(df[cols_select])

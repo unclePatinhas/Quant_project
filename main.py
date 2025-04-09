@@ -1,5 +1,6 @@
 # import modules
 import logging
+import pandas as pd 
 
 # import my modules
 import etl.extract as ext
@@ -13,13 +14,15 @@ def main():
     logging.info("Starting ETL pipeline.")
     
     # Extract
-    df_raw = ext.extract_tweets("data/stock_tweets/tweets_small.csv")
-    
+    df_raw = ext.extract_tweets("data/stock_tweets/tweets.csv")
+    df_ticker = ext.extract_tweets("data/stock_tweets/company_tweet.csv") # tweet_id,ticker_symbol
+    df_ticker_tweet = pd.merge(df_raw, df_ticker, on="tweet_id", how = "inner")
+
     # Transform
-    df_clean_valid, _ = tfm.transform(df_raw)
+    df_clean_valid, _ = tfm.transform(df_ticker_tweet)
     
     # Load
-    ld.load_to_sqlite(df_clean_valid, db_path="data/tweets.db")
+    ld.load_to_sqlite(df_clean_valid, db_path="data/stock_tweets.db")
     
     logging.info("ETL pipeline completed.")
 
