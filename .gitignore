@@ -1,6 +1,11 @@
 #load for now
 etl/load.py
 
+# Jupyter Notebook
+.ipynb_checkpoints
+test_2.ipynb
+test.ipynb
+
 # data
 data/
 
@@ -81,8 +86,6 @@ docs/_build/
 .pybuilder/
 target/
 
-# Jupyter Notebook
-.ipynb_checkpoints
 
 # IPython
 profile_default/
