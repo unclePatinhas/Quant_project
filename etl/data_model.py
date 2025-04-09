@@ -4,7 +4,7 @@ from datetime import datetime
 
 class TweetModel(BaseModel):
     id: int
-    ticker_symbol: str
+    # ticker_symbol: str
     author: str
     post_date: str
     clean_text: str
